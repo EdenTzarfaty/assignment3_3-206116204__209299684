@@ -20,23 +20,27 @@
       </b-button>
     </b-container>
     <div id="Guest" v-if="!$root.store.username">
-    <div class="login-container">
-        <LoginPage class="comp" style="margin-top: -170px;"></LoginPage>
+      <div class="login-container">
+        <LoginPage class="comp" style="margin-top: -170px;padding-bottom: 450px"></LoginPage>
       </div>
     </div>
-      <div id="UserLoggedIn" v-else>
-        <b-container fluid class="recipe-container">
-          <h3 class="explore-badge">My last 3 Watched recipes</h3>
-          <div class="recipe-row">
-            <div class="recipe-column">
-              <PreviewRecipe :recipe="LastWatch1" v-if="LastWatch1"></PreviewRecipe>
-              <PreviewRecipe :recipe="LastWatch2" v-if="LastWatch2"></PreviewRecipe>
-              <PreviewRecipe :recipe="LastWatch3" v-if="LastWatch3"></PreviewRecipe>
-            </div>
+    <div id="UserLoggedIn" v-else>
+      <b-container fluid class="recipe-container">
+        <h3 class="explore-badge">My last 3 Watched recipes</h3>
+        <div class="recipe-row">
+          <div class="recipe-column">
+            <PreviewRecipe :recipe="LastWatch1" v-if="LastWatch1"></PreviewRecipe>
           </div>
-        </b-container>
-      </div>
+          <div class="recipe-column">
+            <PreviewRecipe :recipe="LastWatch2" v-if="LastWatch2"></PreviewRecipe>
+          </div>
+          <div class="recipe-column">
+            <PreviewRecipe :recipe="LastWatch3" v-if="LastWatch3"></PreviewRecipe>
+          </div>
+        </div>
+      </b-container>
     </div>
+  </div>
 </template>
 
 <script>
@@ -113,7 +117,7 @@ export default {
 
 .recipe-container {
   width: 800px;
-  margin-left: -200px;
+  margin-left: -300px;
   padding: 30px;
   background-color: #212529;
   border-radius: 10px;
@@ -176,14 +180,14 @@ export default {
 }
 
 .comp {
-  margin-top: -1000px;
+  padding-top: -80px;
   margin-right: 50px;
   height: 100px;
 }
 
 #UserLoggedIn {
-  margin-top: -700px;
-  margin-left: 1100px;
+  margin-top: -675px;
+  margin-left: 1200px;
   width: 500px;
   height: 800px;
 }

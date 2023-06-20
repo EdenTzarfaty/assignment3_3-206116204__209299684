@@ -132,6 +132,5 @@ export default {
 <style lang="scss" scoped>
 .container {
   font-size: 18px;
-  width: 400px;
 }
 </style>

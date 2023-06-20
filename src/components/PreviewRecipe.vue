@@ -133,10 +133,7 @@ export default {
 }
 
 .recipe-preview .recipe-body .recipe-image {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin: auto;
   display: block;
   width: 98%;
   height: auto;
@@ -178,7 +175,7 @@ export default {
   -ms-flex: 1 auto;
   flex: 1 auto;
   table-layout: fixed;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   list-style-type: none;
   display: -webkit-box;
   display: -moz-box;
