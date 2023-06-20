@@ -21,7 +21,41 @@
           Username length should be between 3-8 characters long
         </b-form-invalid-feedback>
         <b-form-invalid-feedback v-if="!$v.form.username.alpha">
-          Username alpha
+          Username should contain only alphabetic characters
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-firstname"
+        label-cols-sm="3"
+        label="First Name:"
+        label-for="firstname"
+      >
+        <b-form-input
+          id="firstname"
+          v-model="$v.form.firstName.$model"
+          type="text"
+          :state="validateState('firstName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.required">
+          First Name is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-lastname"
+        label-cols-sm="3"
+        label="Last Name:"
+        label-for="lastname"
+      >
+        <b-form-input
+          id="lastname"
+          v-model="$v.form.lastName.$model"
+          type="text"
+          :state="validateState('lastName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.required">
+          Last Name is required
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -43,7 +77,7 @@
       </b-form-group>
 
       <b-form-group
-        id="input-group-Password"
+        id="input-group-password"
         label-cols-sm="3"
         label="Password:"
         label-for="password"
@@ -59,12 +93,12 @@
         </b-form-invalid-feedback>
         <b-form-text v-else-if="$v.form.password.$error" text-variant="info">
           Your password should be <strong>strong</strong>. <br />
-          For that, your password should be also:
+          For that, your password should also:
         </b-form-text>
         <b-form-invalid-feedback
           v-if="$v.form.password.required && !$v.form.password.length"
         >
-          Have length between 5-10 characters long
+          Have a length between 5-10 characters
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -119,8 +153,8 @@
       >Register</b-button
       >
       <div class="mt-2">
-        You have an account already?
-        <router-link to="login"> Log in here</router-link>
+        Already have an account?
+        <router-link to="login">Log in here</router-link>
       </div>
     </b-form>
     <b-alert
@@ -130,12 +164,8 @@
       dismissible
       show
     >
-      Register failed: {{ form.submitError }}
+      Registration failed: {{ form.submitError }}
     </b-alert>
-    <!-- <b-card class="mt-3 md-3" header="Form Data Result">
-      <pre class="m-0"><strong>form:</strong> {{ form }}</pre>
-      <pre class="m-0"><strong>$v.form:</strong> {{ $v.form }}</pre>
-    </b-card> -->
   </div>
 </template>
 
@@ -176,6 +206,12 @@ export default {
         length: (u) => minLength(3)(u) && maxLength(8)(u),
         alpha
       },
+      firstName: {
+        required
+      },
+      lastName: {
+        required
+      },
       country: {
         required
       },
@@ -194,39 +230,39 @@ export default {
     }
   },
   mounted() {
-    // console.log("mounted");
     this.countries.push(...countries);
-    // console.log($v);
   },
   methods: {
     validateState(param) {
       const { $dirty, $error } = this.$v.form[param];
       return $dirty ? !$error : null;
     },
-    async Register() {
+    async register() {
       try {
         const response = await this.axios.post(
-          this.$root.store.server_domain + "auto/register",
+          this.$root.store.server_domain + "/Register",
           {
             username: this.form.username,
+            firstName: this.form.firstName,
+            lastName: this.form.lastName,
+            country: this.form.country,
             password: this.form.password,
+            confirmPassword: this.form.confirmedPassword,
             email: this.form.email
           }
         );
-        this.$router.push("/login");
+        await this.$router.push("/login");
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;
       }
     },
     onRegister() {
-      // console.log("register method called");
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
       }
-      // console.log("register method go");
-      this.Register();
+      this.register();
     },
     onReset() {
       this.form = {

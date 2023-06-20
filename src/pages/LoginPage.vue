@@ -129,7 +129,7 @@ export default {
         } catch (error) {
           console.log(error);
         }
-        this.$router.push("/");
+        await this.$router.push("/");
       } catch (err) {
         window.alert(err.response.data.message);
         console.log(err.response);

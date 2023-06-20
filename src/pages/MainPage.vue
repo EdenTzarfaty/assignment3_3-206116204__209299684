@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title" style="color: #1b1b1b; padding-bottom: 30px">Recipes web</h1>
+    <h1 class="title" style="color: #1b1b1b; padding-top: 130px">Recipes web</h1>
     <b-container fluid class="recipe-container">
       <h3 class="explore-badge">Explore these recipes</h3>
       <div class="recipe-row">
@@ -22,8 +22,7 @@
     <div id="Guest" v-if="!$root.store.username">
 
       <div class="login-container">
-        <LoginPage class="comp" style="margin-top: -775px;padding-bottom: 228px;  padding-top: 200px;
-"></LoginPage>
+        <LoginPage class="comp" style="margin-top: -775px;padding-bottom: 228px;  padding-top: 200px;"></LoginPage>
       </div>
     </div>
     <!--      לסדר את 3 המתכונים שהמשתמש צפה לאחרונה    <li>-->
@@ -202,7 +201,6 @@ export default {
 .elemnt_row {
   padding: 20px;
 }
-
 
 
 </style>

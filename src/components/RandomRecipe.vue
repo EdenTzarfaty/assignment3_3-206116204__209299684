@@ -1,26 +1,46 @@
 <template>
   <div>
-    <b-card :title="recipe.title" :img-src="recipe.image" img-alt="Image" img-top tag="article" style="max-width: 20rem;" class="mb-2">
+    <b-card :title="recipe.title" :img-src="recipe.image" img-alt="Image" img-top tag="article"
+            style="max-width: 20rem;" class="mb-2">
       <b-card no-body v-bind:title="recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">
         <router-link :to="{ name: 'RecipeViewPage', params:{id:recipe.id} } ">
         </router-link>
         <b-card-text>
           <ul class="recipe-overview" style="list-style-type: none;">
-            <li> <b-icon-clock-history style="font-size: 2rem;"></b-icon-clock-history><span> Time to prepare: </span> {{recipe.readyInMinutes}} </li>
-            <li><b-icon-heart-fill style="font-size: 2rem;"></b-icon-heart-fill><span> Likes: </span> {{ recipe.popularity}}</li>
-            <li><b-icon icon="egg" style="font-size: 2rem;"></b-icon><span>Vegan: </span> {{recipe.vegan}}</li>
-            <li><b-icon-egg-fill style="font-size: 2rem;"></b-icon-egg-fill><span>Vegeterian: </span> {{recipe.vegetarian}}</li>
-            <li><b-icon-x-circle-fill style="font-size: 2rem;"></b-icon-x-circle-fill><span>Gluten-Free:</span> {{recipe.glutenFree}}</li>
-            <!--          <li>-->
-            <!--            <span>Favorite:</span>-->
-            <!--            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px" v-if="this.favortied === true" checked disabled>-->
-            <!--            <input class="form-check-input" type="checkbox" value="" @click="Favorite()" id="flexCheckDefault" style="margin-left:10px" v-else-if="this.favortied !== true">-->
-            <!--          </li>-->
-            <!--          <li>-->
-            <!--            <span>Watched:</span>-->
-            <!--            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px" v-if="this.watched === true" checked disabled>-->
-            <!--            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px" v-else-if="this.watched !== true" disabled>-->
-            <!--          </li>-->
+            <li>
+              <b-icon-clock-history style="font-size: 2rem;"></b-icon-clock-history>
+              <span> Time to prepare: </span> {{ recipe.readyInMinutes }}
+            </li>
+            <li>
+              <b-icon-heart-fill style="font-size: 2rem;"></b-icon-heart-fill>
+              <span> Likes: </span> {{ recipe.popularity }}
+            </li>
+            <li>
+              <b-icon icon="egg" style="font-size: 2rem;"></b-icon>
+              <span>Vegan: </span> {{ recipe.vegan }}
+            </li>
+            <li>
+              <b-icon-egg-fill style="font-size: 2rem;"></b-icon-egg-fill>
+              <span>Vegeterian: </span> {{ recipe.vegetarian }}
+            </li>
+            <li>
+              <b-icon-x-circle-fill style="font-size: 2rem;"></b-icon-x-circle-fill>
+              <span>Gluten-Free:</span> {{ recipe.glutenFree }}
+            </li>
+            <li>
+              <span>Favorite:</span>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
+                     v-if="this.favortied === true" checked disabled>
+              <input class="form-check-input" type="checkbox" value="" @click="Favorite()" id="flexCheckDefault"
+                     style="margin-left:10px" v-else-if="this.favortied !== true">
+            </li>
+            <li>
+              <span>Watched:</span>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
+                     v-if="this.watched === true" checked disabled>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
+                     v-else-if="this.watched !== true" >
+            </li>
           </ul>
         </b-card-text>
       </b-card>
@@ -30,7 +50,7 @@
 
 <script>
 export default {
-  name: 'RandomRecipe',
+  name: "RandomRecipe",
   props: {
     recipe: {
       type: Object,
@@ -39,9 +59,8 @@ export default {
   },
   data() {
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      //favortied: '',
-      //watched: '',
+      favortied:'',
+      watched:'',
     };
   },
   mounted() {
@@ -49,54 +68,52 @@ export default {
     //this.getWatched();
   },
   methods: {
-    //   async getFavorites() {
-    //     try {
-    //       const response = await this.axios.get(this.$root.store.server_domain + "/users/favoritesIDOnly",);
-    //       const recipesIDS = response.data;
-    //       //let recipes=RecipesData;
-    //       for (let i = 0; i < recipesIDS.length; i++) {
-    //         if (recipesIDS[i] === this.recipe.id) {
-    //           this.favortied = true;
-    //           return;
-    //         }
-    //       }
-    //       this.favortied = '';
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   },
-    //   async Favorite() {
-    //     try {
-    //       const response = await this.axios.post(this.$root.store.server_domain + "/users/favorites",
-    //         {
-    //           recipeId: this.recipe.id
-    //         }
-    //       );
-    //       this.favortied = true;
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   },
-    //   async getWatched() {
-    //     try {
-    //       const response = await this.axios.get(this.$root.store.server_domain + "/users/user_indication_recipe_NEW",);
-    //       const RecipesData = response.data;
-    //       let recipes = RecipesData;
-    //       for (let i = 0; i < recipes.length; i++) {
-    //         if (recipes[i] === this.recipe.id) {
-    //           this.watched = true;
-    //           return;
-    //         }
-    //       }
-    //       this.watched = '';
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   },
-    //}
-
+      // async getFavorites() {
+      //   try {
+      //     const response = await this.axios.get(this.$root.store.server_domain + "/users/favoritesIDOnly",);
+      //     const recipesIDS = response.data;
+      //     //let recipes=RecipesData;
+      //     for (let i = 0; i < recipesIDS.length; i++) {
+      //       if (recipesIDS[i] === this.recipe.id) {
+      //         this.favortied = true;
+      //         return;
+      //       }
+      //     }
+      //     this.favortied = '';
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // },
+      async Favorite() {
+        try {
+          console.log(this.recipe.recipe_id);
+          await this.axios.post(this.$root.store.server_domain + "/users/addFavoriteReciped/"+ parseInt(this.recipe.recipe_id),
+          );
+          console.log("=============================================================")
+          console.log(this.recipe.id)
+          this.favortied = true;
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      // async getWatched() {
+      //   try {
+      //     const response = await this.axios.get(this.$root.store.server_domain + "/users/user_indication_recipe_NEW",);
+      //     const RecipesData = response.data;
+      //     let recipes = RecipesData;
+      //     for (let i = 0; i < recipes.length; i++) {
+      //       if (recipes[i] === this.recipe.id) {
+      //         this.watched = true;
+      //         return;
+      //       }
+      //     }
+      //     this.watched = '';
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // },
   }
-}
+};
 
 </script>
 
@@ -109,6 +126,7 @@ export default {
   margin: 10px 10px;
 
 }
+
 .recipe-preview > .recipe-body {
   width: 100%;
   height: 200px;
