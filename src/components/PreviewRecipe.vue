@@ -1,36 +1,32 @@
 <template>
   <div>
-    <!-- <b-card :title="recipe.title" :img-src="recipe.image" img-alt="Image" img-top tag="article" style="max-width: 20rem;" class="mb-2"> -->
-    <b-card no-body v-bind:title="recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">
-      <router-link :to="{ name: 'RecipeViewPage', params:{id:recipe.id} } ">
-        <b-card-img :src="recipe.image"/>
-      </router-link>
-      <b-card-title v-bind:title="recipe.title"></b-card-title>
-      <b-card-text>
-        <ul class="recipe-overview" style="list-style-type: none;">
-          <li><b-icon-heart-fill style="font-size: 2rem;"></b-icon-heart-fill><span> Likes:</span> {{ recipe.popularity}}</li>
-          <li><b-icon-clock-history style="font-size: 2rem;"></b-icon-clock-history><span> Time:</span> {{recipe.readyInMinutes}} </li>
-          <li><b-icon icon="egg" style="font-size: 2rem;"></b-icon><span>Vegan:</span> {{recipe.vegan}}</li>
-          <li><b-icon-egg-fill style="font-size: 2rem;"></b-icon-egg-fill><span>Vegeterian:</span> {{recipe.vegetarian}}</li>
-          <li><b-icon-x-circle-fill style="font-size: 2rem;"></b-icon-x-circle-fill><span>Gluten-Free:</span> {{recipe.glutenFree}}</li>
-
-          <li>
-            <span>Favorite:</span>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px" v-if="this.favortied == true" checked disabled>
-            <input class="form-check-input" type="checkbox" value="" @click="Favorite()" id="flexCheckDefault" style="margin-left:10px" v-else-if="this.favortied != true">
-          </li>
-          <li>
-            <span>Watched:</span>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px" v-if="this.watched == true" checked disabled>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px" v-else-if="this.watched != true" disabled>
-          </li>
-        </ul>
-      </b-card-text>
+    <b-card :title="recipe.title" :img-src="recipe.image" img-alt="Image" img-top tag="article" style="max-width: 20rem;" class="mb-2">
+      <b-card no-body v-bind:title="recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">
+        <router-link :to="{ name: 'RecipeViewPage', params:{id:recipe.id} } ">
+        </router-link>
+        <b-card-text>
+          <ul class="recipe-overview" style="list-style-type: none;">
+            <li> <b-icon-clock-history style="font-size: 2rem;"></b-icon-clock-history><span> Time to prepare: </span> {{recipe.readyInMinutes}} </li>
+            <li><b-icon-heart-fill style="font-size: 2rem;"></b-icon-heart-fill><span> Likes: </span> {{ recipe.popularity}}</li>
+            <li><b-icon icon="egg" style="font-size: 2rem;"></b-icon><span>Vegan: </span> {{recipe.vegan}}</li>
+            <li><b-icon-egg-fill style="font-size: 2rem;"></b-icon-egg-fill><span>Vegeterian: </span> {{recipe.vegetarian}}</li>
+            <li><b-icon-x-circle-fill style="font-size: 2rem;"></b-icon-x-circle-fill><span>Gluten-Free:</span> {{recipe.glutenFree}}</li>
+            <!--          <li>-->
+            <!--            <span>Favorite:</span>-->
+            <!--            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px" v-if="this.favortied === true" checked disabled>-->
+            <!--            <input class="form-check-input" type="checkbox" value="" @click="Favorite()" id="flexCheckDefault" style="margin-left:10px" v-else-if="this.favortied !== true">-->
+            <!--          </li>-->
+            <!--          <li>-->
+            <!--            <span>Watched:</span>-->
+            <!--            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px" v-if="this.watched === true" checked disabled>-->
+            <!--            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px" v-else-if="this.watched !== true" disabled>-->
+            <!--          </li>-->
+          </ul>
+        </b-card-text>
+      </b-card>
     </b-card>
   </div>
-
 </template>
-
 <script>
 export default {
   name: 'RandomRecipe',

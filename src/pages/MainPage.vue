@@ -24,6 +24,8 @@
         <LoginPage class="comp" style="margin-top: -170px;padding-bottom: 450px"></LoginPage>
       </div>
     </div>
+    <!--      לסדר את 3 המתכונים שהמשתמש צפה לאחרונה    <li>-->
+
     <div id="UserLoggedIn" v-else>
       <b-container fluid class="recipe-container">
         <h3 class="explore-badge">My last 3 Watched recipes</h3>
