@@ -19,6 +19,7 @@
     "vuelidate": "^0.7.5"
   },
   "devDependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
     "@vue/cli-plugin-router": "~4.4.0",

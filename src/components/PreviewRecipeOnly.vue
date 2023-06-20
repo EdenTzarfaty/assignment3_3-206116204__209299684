@@ -67,7 +67,7 @@ export default {
         const recipesIDS = response.data;
         //let recipes=RecipesData;
         for(let i = 0; i<recipesIDS.length;i++){
-          if(recipesIDS[i] == this.recipe.id){
+          if(recipesIDS[i] === this.recipe.id){
             this.favortied = true;
             return;
           }
@@ -96,7 +96,7 @@ export default {
         const RecipesData = response.data;
         let recipes=RecipesData;
         for(let i = 0; i<recipes.length;i++){
-          if(recipes[i] == this.Recipe.id){
+          if(recipes[i] === this.Recipe.id){
             this.watched = true;
             return;
           }
@@ -108,7 +108,7 @@ export default {
     },
     getInstructions(){
       //console.log(this.Recipe)
-      if(this.Recipe.analyzedInstructions == undefined && this.Recipe.instructions != undefined){
+      if(this.Recipe.analyzedInstructions === undefined && this.Recipe.instructions !== undefined){
         this.Instructions = this.Recipe.instructions;
       }
       else{

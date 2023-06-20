@@ -90,13 +90,33 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="Email:"
+        label-for="email"
+      >
+        <b-form-input
+          id="email"
+          v-model="$v.form.email.$model"
+          type="email"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          Email is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.email.email">
+          Invalid email format
+        </b-form-invalid-feedback>
+      </b-form-group>
+
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
         variant="primary"
         style="width:250px;"
         class="ml-5 w-75"
-        >Register</b-button
+      >Register</b-button
       >
       <div class="mt-2">
         You have an account already?
@@ -166,6 +186,10 @@ export default {
       confirmedPassword: {
         required,
         sameAsPassword: sameAs("password")
+      },
+      email: {
+        required,
+        email
       }
     }
   },
@@ -182,16 +206,14 @@ export default {
     async Register() {
       try {
         const response = await this.axios.post(
-          // "https://test-for-3-2.herokuapp.com/user/Register",
-          this.$root.store.server_domain + "/Register",
-
+          this.$root.store.server_domain + "auto/register",
           {
             username: this.form.username,
-            password: this.form.password
+            password: this.form.password,
+            email: this.form.email
           }
         );
         this.$router.push("/login");
-        // console.log(response);
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;
@@ -223,9 +245,17 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 .container {
-  max-width: 500px;
-  font-size: 18px;
+  max-width: 800px;
+  font-size: 25px;
+  width: 800px;
+  margin-top: 30px;
+  padding: 30px;
+  background-color: #212529;
+  border-radius: 10px;
+  color: white;
+  font-family: "Agency FB", sans-serif;
 }
 </style>

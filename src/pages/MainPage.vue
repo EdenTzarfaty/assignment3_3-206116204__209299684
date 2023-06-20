@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title" style="color: #1b1b1b; padding-bottom: 30px">Recipes</h1>
+    <h1 class="title" style="color: #1b1b1b; padding-bottom: 30px">Recipes web</h1>
     <b-container fluid class="recipe-container">
       <h3 class="explore-badge">Explore these recipes</h3>
       <div class="recipe-row">
@@ -20,8 +20,10 @@
       </b-button>
     </b-container>
     <div id="Guest" v-if="!$root.store.username">
+
       <div class="login-container">
-        <LoginPage class="comp" style="margin-top: -170px;padding-bottom: 450px"></LoginPage>
+        <LoginPage class="comp" style="margin-top: -775px;padding-bottom: 228px;  padding-top: 200px;
+"></LoginPage>
       </div>
     </div>
     <!--      לסדר את 3 המתכונים שהמשתמש צפה לאחרונה    <li>-->
@@ -109,12 +111,15 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  padding-bottom: 250px;
-  min-height: 100vh;
+  padding-bottom: 350px;
+  height: 112vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  //margin-top: -600px;
+  //margin-left: 800px
+
 }
 
 .recipe-container {
@@ -128,13 +133,11 @@ export default {
 }
 
 .login-container {
-  width: 400px;
-  height: 500px;
-  background-color: #212529;
-  border-radius: 10px;
-  color: white;
-  font-family: "Agency FB", sans-serif;
-  margin-top: -600px;
+  //background-color: #212529;
+  //border-radius: 10px;
+  //color: white;
+  //font-family: "Agency FB", sans-serif;
+  margin-top: 100px;
   margin-left: 800px;
 }
 
@@ -182,10 +185,12 @@ export default {
 }
 
 .comp {
-  padding-top: -80px;
   margin-right: 50px;
   height: 100px;
+  margin-top: 100px;
+  margin-left: -100px;
 }
+
 
 #UserLoggedIn {
   margin-top: -675px;
@@ -197,6 +202,7 @@ export default {
 .elemnt_row {
   padding: 20px;
 }
+
 
 
 </style>
