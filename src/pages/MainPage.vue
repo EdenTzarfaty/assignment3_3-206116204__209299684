@@ -185,6 +185,7 @@ export default {
   margin-top: -700px;
   margin-left: 1100px;
   width: 500px;
+  height: 800px;
 }
 
 .elemnt_row {
