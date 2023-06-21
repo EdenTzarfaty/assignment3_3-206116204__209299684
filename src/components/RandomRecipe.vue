@@ -38,7 +38,7 @@
               <span>Watched:</span>
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
                      v-if="this.watched === true" checked disabled>
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
+              <input class="form-check-input" type="checkbox" value="" @click="Watch()" id="flexCheckDefault" style="margin-left:10px"
                      v-else-if="this.watched !== true" >
             </li>
           </ul>
@@ -68,51 +68,32 @@ export default {
     //this.getWatched();
   },
   methods: {
-      // async getFavorites() {
-      //   try {
-      //     const response = await this.axios.get(this.$root.store.server_domain + "/users/favoritesIDOnly",);
-      //     const recipesIDS = response.data;
-      //     //let recipes=RecipesData;
-      //     for (let i = 0; i < recipesIDS.length; i++) {
-      //       if (recipesIDS[i] === this.recipe.id) {
-      //         this.favortied = true;
-      //         return;
-      //       }
-      //     }
-      //     this.favortied = '';
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // },
-      async Favorite() {
-        try {
-          console.log(this.recipe.recipe_id);
-          await this.axios.post(this.$root.store.server_domain + "/users/addFavoriteReciped/"+ parseInt(this.recipe.recipe_id),
-          );
-          console.log("=============================================================")
-          console.log(this.recipe.id)
-          this.favortied = true;
-        } catch (error) {
-          console.log(error);
-        }
-      },
-      // async getWatched() {
-      //   try {
-      //     const response = await this.axios.get(this.$root.store.server_domain + "/users/user_indication_recipe_NEW",);
-      //     const RecipesData = response.data;
-      //     let recipes = RecipesData;
-      //     for (let i = 0; i < recipes.length; i++) {
-      //       if (recipes[i] === this.recipe.id) {
-      //         this.watched = true;
-      //         return;
-      //       }
-      //     }
-      //     this.watched = '';
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // },
+
+// Use the Axios instance to make the request
+    async Favorite() {
+      try {
+        await this.axios.post(
+          this.$root.store.server_domain + "/users/addFavoriteReciped/" + parseInt(this.recipe.recipe_id), null, { withCredentials: true }
+        );
+        this.favorited = true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async Watch() {
+      // this.axios.defaults.withCredentials = true;
+      try {
+        await this.axios.post(
+          this.$root.store.server_domain + "/users/user_watched_recipe/" + parseInt(this.recipe.recipe_id), null, { withCredentials: true }
+        );
+        this.watched = true;
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
+
 };
 
 </script>

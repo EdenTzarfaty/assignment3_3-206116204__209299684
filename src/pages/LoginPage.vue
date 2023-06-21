@@ -42,7 +42,8 @@
         variant="primary"
         style="width:100px;display:block;"
         class="mx-auto w-100"
-      >Login</b-button
+      >Login
+      </b-button
       >
       <div class="mt-2">
         Do not have an account yet?
@@ -65,12 +66,15 @@
 </template>
 
 <script>
-import {  required,
+import {
+  required,
   minLength,
   maxLength,
   alpha,
   sameAs,
-  email } from "vuelidate/lib/validators";
+  email
+} from "vuelidate/lib/validators";
+
 export default {
   name: "Login",
   data() {
@@ -102,10 +106,11 @@ export default {
       const { $dirty, $error } = this.$v.form[param];
       return $dirty ? !$error : null;
     },
+
     async Login() {
       try {
         const response = await this.axios.post(
-          this.$root.store.server_domain +"/Login",
+          this.$root.store.server_domain + "/Login",
           {
             username: this.form.username,
             password: this.form.password
@@ -117,7 +122,7 @@ export default {
         this.$root.store.login(this.form.username);
         try {
           const response = await this.axios.get(
-            this.$root.store.server_domain+"/users/user_last_3_watch",
+            this.$root.store.server_domain + "/users/user_last_3_watch"
           );
           const RecipeData = response.data;
           this.$root.store.setQuery1(RecipeData[0].History_Watch_R1);
@@ -129,6 +134,8 @@ export default {
         } catch (error) {
           console.log(error);
         }
+        console.log();
+
         await this.$router.push("/");
       } catch (err) {
         window.alert(err.response.data.message);

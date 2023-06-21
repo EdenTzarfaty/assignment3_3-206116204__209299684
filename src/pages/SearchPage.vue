@@ -10,7 +10,6 @@
                 <input type="search" v-model="query" placeholder="Search for recipes" class="form-control">
                 <div class="mx-auto">
                   <b-dropdown id="dropdown-1"
-                              split
                               split-variant="outline-primary"
                               variant="primary"
                               class="m-2"
@@ -21,7 +20,6 @@
                   </b-dropdown>
                   <!--                <b-form-input></b-form-input>-->
                   <b-dropdown id="dropdown-2"
-                              split
                               split-variant="outline-primary"
                               variant="primary"
                               :text="cuisine"
@@ -54,7 +52,6 @@
                     <b-dropdown-item @click="changeTextCuisine('Vietnamese')">Vietnamese</b-dropdown-item>
                   </b-dropdown>
                   <b-dropdown id="dropdown-3"
-                              split
                               split-variant="outline-primary"
                               variant="primary"
                               :text="diet"
@@ -73,7 +70,6 @@
                     <b-dropdown-item @click="changeTextDiet('Whole30')">Whole30</b-dropdown-item>
                   </b-dropdown>
                   <b-dropdown id="dropdown-4"
-                              split
                               split-variant="outline-primary"
                               variant="primary"
                               :text="intolerance"
@@ -112,9 +108,9 @@
       </div>
     </section>
     <div>
-      <h1 class="title" style="margin-left:160px" >Recipes</h1>
+      <h1 class="title" style="margin-left:160px">Recipes</h1>
       <!--/*      <b-dropdown id="dropdown-2" text="Sort By" style="margin-left:160px" v-if="this.recipes != ''">*/-->
-      <b-dropdown id="dropdown-2" split
+      <b-dropdown id="dropdown-2"
                   split-variant="outline-primary"
                   variant="primary"
                   text="Sort By"
@@ -125,11 +121,11 @@
       </b-dropdown>
     </div>
     <!--    <h1 class="subtitle" style="margin-left:300px" v-if="this.recipes.length == 0" >0 Search results for the given query</h1>-->
-    <h1 class="subtitle" style="margin-left:200px" v-if="this.recipes.length == 0" >0 Search results</h1>
-    <section class="ReturnedRecipes" v-if="this.recipes != ''">
+    <!--    <h1 class="subtitle" style="margin-left:200px" v-if="this.recipes.length == 0" >0 Search results</h1>-->
+    <section class="ReturnedRecipes" v-if="this.recipes !== ''">
       <b-card-group deck>
         <PreviewRecipeOnly v-for="recipe in this.recipes"
-                           :key="recipe.id"
+                           :key="recipe.recipe_id"
                            :Recipe="recipe"
         ></PreviewRecipeOnly>
       </b-card-group>
@@ -140,126 +136,142 @@
 
 <script>
 import PreviewRecipeOnly from "../components/PreviewRecipeOnly";
+import previewRecipeOnly from "@/components/PreviewRecipeOnly";
+
 export default {
-  name:"SearchPage",
-  components:{
+  name: "SearchPage",
+  components: {
     PreviewRecipeOnly
   },
-  data(){
-    return{
-      cuisine:'Cuisine',
-      diet:'Diet',
-      intolerance:'Intolerance',
-      num:'Number Of Recipe',
+  data() {
+    return {
+      cuisine: "Cuisine",
+      diet: "Diet",
+      intolerance: "Intolerance",
+      num: "Number Of Recipe",
 
-      query:'',
-      recipes:'',
-    }
+      query: "",
+      recipes: ""
+    };
   },
-  mounted(){
-    console.log(localStorage.getItem('searchResults'))
-    if (localStorage.getItem('searchResults') && localStorage.getItem('username')){
+  mounted() {
+    console.log(localStorage.getItem("searchResults"));
+    if (localStorage.getItem("searchResults") && localStorage.getItem("username")) {
       try {
-        this.recipes = JSON.parse(localStorage.getItem('searchResults'));
-      } catch(e) {
-        localStorage.removeItem('searchResults');
+        this.recipes = JSON.parse(localStorage.getItem("searchResults"));
+      } catch (e) {
+        localStorage.removeItem("searchResults");
       }
-    }
-    else{
-      this.recipes = '';
+    } else {
+      this.recipes = "";
     }
   },
-  methods:{
-    changeTextCuisine(x){
-      this.cuisine=x;
+  methods: {
+    changeTextCuisine(x) {
+      this.cuisine = x;
     },
-    changeTextDiet(x){
-      this.diet=x;
+    changeTextDiet(x) {
+      this.diet = x;
     },
-    changeTextIntolerance(x){
-      this.intolerance=x;
+    changeTextIntolerance(x) {
+      this.intolerance = x;
     },
-    changeTextNum(x){
-      this.num=x
+    changeTextNum(x) {
+      this.num = x;
     },
-    async searchRecipe(){
+    async searchRecipe() {
       // let query=JSON.stringify(this.query);
       // let num = JSON.stringify(this.num);
-      let cuisineFixed = '';
-      let dietFixed = '';
-      let intoleranceFixed ='';
-      if(this.cuisine != 'Cuisine'){
-        cuisineFixed = this.cuisine
+      let cuisineFixed = "";
+      let dietFixed = "";
+      let intoleranceFixed = "";
+      if (this.cuisine !== "Cuisine") {
+        cuisineFixed = this.cuisine;
       }
-      if(this.diet != 'Diet'){
+      if (this.diet !== "Diet") {
         dietFixed = this.diet;
       }
-      if(this.intolerance != 'Intolerance'){
+      if (this.intolerance !== "Intolerance") {
         intoleranceFixed = this.intolerance;
       }
       try {
         const response = await this.axios.get(
-          this.$root.store.server_domain +"/recipes/search/query/"+this.query+"/amount/"+this.num,
+          this.$root.store.server_domain + "/recipes/search/query/" + this.query + "/amount/" + this.num,
           {
-            params:{
-              cuisine:cuisineFixed,
-              diet:dietFixed,
-              intolerances:intoleranceFixed
+            params: {
+              cuisine: cuisineFixed,
+              diet: dietFixed,
+              intolerances: intoleranceFixed
             }
           }
         );
         const RecipesData = response.data;
-        this.recipes=RecipesData;
-        const parsed = JSON.stringify(this.recipes)
-        this.$root.store.setSearchResults(parsed)
-        console.log(this.$root.store.searchResults)
-        console.log(this.recipes)
+        console.log("===============================");
+        this.recipes = RecipesData;
+        const parsed = JSON.stringify(this.recipes);
+        this.$root.store.setSearchResults(parsed);
+        // console.log(this.$root.store.searchResults)
+        console.log("----------------33-------------------");
+        console.log(this.recipes);
+        // console.log(localStorage.searchResults[0])
+        await previewRecipeOnly.methods.userWatched();
       } catch (error) {
+        console.log("error");
         console.log(error);
       }
     },
-    sortByTime(){
+    sortByTime() {
       this.recipes.sort(this.compare_Time);
     },
-    sortByLikes(){
+    sortByLikes() {
       this.recipes.sort(this.compare_Likes);
       this.recipes.reverse();
     },
-    compare_Time( a, b ){
-      if ( a.readyInMinutes < b.readyInMinutes){
+    compare_Time(a, b) {
+      if (a.readyInMinutes < b.readyInMinutes) {
         return -1;
       }
-      if ( a.readyInMinutes > b.readyInMinutes){
+      if (a.readyInMinutes > b.readyInMinutes) {
         return 1;
       }
       return 0;
     },
-    compare_Likes( a, b ){
-      if ( a.popularity < b.popularity){
+    compare_Likes(a, b) {
+      if (a.popularity < b.popularity) {
         return -1;
       }
-      if ( a.popularity > b.popularity){
+      if (a.popularity > b.popularity) {
         return 1;
       }
       return 0;
     }
-  },
-}
+  }
+};
 </script>
 
 
 <style>
-.body{
+.body {
   background: #2c3e50;
 }
+
 div[data-v-1d823742] {
   width: 360px;
   margin-left: 20px;
   margin-right: -9px;
 }
+
 .title {
+  color: black;
   font-family: "Agency FB", serif;
+  font-weight: bold;
   font-size: 80px;
+}
+
+.subtitle {
+  color: black;
+  font-family: "Agency FB", serif;
+  font-weight: bold;
 }
 
 .input-group {
@@ -272,38 +284,50 @@ div[data-v-1d823742] {
 
 .form-control {
   font-family: "Agency FB", serif;
+
 }
-.dd-sortBy{
+
+.dd-sortBy {
   margin-left: 160px;
 }
+
 .m-2 {
+  navbutton_background_color: #42b983;
 }
-.input-group > .form-control{
-  /*position: relative;*/
-  /*flex: 1 1 auto;*/
+
+.input-group > .form-control {
+  position: relative;
+  flex: 1 1 auto;
   width: 160%;
   height: 50px;
   min-width: 100px;
 }
-.div{
-  width: 360px ;
+
+.div {
+  width: 360px;
 }
+
 .dropdown-menu {
   max-height: 280px;
   overflow-y: auto;
 }
-.input-group > .input-group-append > .btn{
+
+.input-group > .input-group-append > .btn {
   width: 674px;
   height: 40px;
 }
-.ReturnedRecipes{
+
+.ReturnedRecipes {
   background-color: #45494a;
 }
-.card-title{
+
+.card-title {
   font-size: 40px;
   font-family: "Agency FB", serif;
 }
-.card{
+
+.card {
   background-color: #acbeea;
 }
+
 </style>
