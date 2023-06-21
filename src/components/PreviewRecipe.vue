@@ -45,7 +45,7 @@ export default {
   },
   mounted() {
     this.getFavorites();
-    this.getWatched();
+    //this.getWatched();
     {
       this.axios.get(this.recipe.image).then((i) => {
         this.image_load = true;
@@ -81,22 +81,22 @@ export default {
         console.log(error);
       }
     },
-    async getWatched(){
-      try {
-        const response = await this.axios.get(this.$root.store.server_domain+"/users/user_indication_recipe_NEW",);
-        const RecipesData = response.data;
-        let recipes=RecipesData;
-        for(let i = 0; i<recipes.length;i++){
-          if(recipes[i] == this.recipe.id){
-            this.watched = true;
-            return;
-          }
-        }
-        this.watched = '';
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    // async getWatched(){
+    //   try {
+    //     const response = await this.axios.get(this.$root.store.server_domain+"/users/user_indication_recipe_NEW",);
+    //     const RecipesData = response.data;
+    //     let recipes=RecipesData;
+    //     for(let i = 0; i<recipes.length;i++){
+    //       if(recipes[i] === this.recipe.id){
+    //         this.watched = true;
+    //         return;
+    //       }
+    //     }
+    //     this.watched = '';
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
     // async Watch(){
     //   try {
     //     const parsed = JSON.stringify(this.recipe.id);

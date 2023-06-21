@@ -114,7 +114,7 @@
                   split-variant="outline-primary"
                   variant="primary"
                   text="Sort By"
-                  v-if="this.recipes != ''"
+                  v-if="this.recipes !== ''"
                   class="dd-sortBy">
         <b-dropdown-item @click="sortByTime()">Time</b-dropdown-item>
         <b-dropdown-item @click="sortByLikes()">Likes</b-dropdown-item>
@@ -127,6 +127,7 @@
         <PreviewRecipeOnly v-for="recipe in this.recipes"
                            :key="recipe.recipe_id"
                            :Recipe="recipe"
+                           @toggle-favorite="toggleFavorite(recipe)"
         ></PreviewRecipeOnly>
       </b-card-group>
     </section>
@@ -136,7 +137,6 @@
 
 <script>
 import PreviewRecipeOnly from "../components/PreviewRecipeOnly";
-import previewRecipeOnly from "@/components/PreviewRecipeOnly";
 
 export default {
   name: "SearchPage",
@@ -167,6 +167,9 @@ export default {
     }
   },
   methods: {
+    toggleFavorite(recipe) {
+      recipe.favorite = !recipe.favorite;
+    },
     changeTextCuisine(x) {
       this.cuisine = x;
     },
@@ -211,12 +214,9 @@ export default {
         const parsed = JSON.stringify(this.recipes);
         this.$root.store.setSearchResults(parsed);
         // console.log(this.$root.store.searchResults)
-        console.log("----------------33-------------------");
-        console.log(this.recipes);
         // console.log(localStorage.searchResults[0])
-        await previewRecipeOnly.methods.userWatched();
+        //await previewRecipeOnly.methods.userWatched();
       } catch (error) {
-        console.log("error");
         console.log(error);
       }
     },

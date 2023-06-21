@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title" style="color: #1b1b1b; padding-top: 130px">Recipes web</h1>
+    <h1 class="title" style="color: #1b1b1b; padding-top: 50px">Recipes web</h1>
     <b-container fluid class="recipe-container">
       <h3 class="explore-badge">Explore these recipes</h3>
       <div class="recipe-row">

@@ -79,6 +79,10 @@ const shared_data = {
     localStorage.removeItem("username");
     this.username = undefined;
   },
+  searchResults: localStorage.searchResults,
+  setSearchResults(searchResults){
+    localStorage.setItem("searchResults", searchResults);
+  },
   server_domain: "http://localhost:3000"
 };
 

@@ -3,7 +3,7 @@
     <b-card :title="recipe.title" :img-src="recipe.image" img-alt="Image" img-top tag="article"
             style="max-width: 20rem;" class="mb-2">
       <b-card no-body v-bind:title="recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">
-        <router-link :to="{ name: 'RecipeViewPage', params:{id:recipe.id} } ">
+        <router-link :to="{ name: 'RecipeViewPage', params:{recipeId:recipe.recipe_id} } ">
         </router-link>
         <b-card-text>
           <ul class="recipe-overview" style="list-style-type: none;">
