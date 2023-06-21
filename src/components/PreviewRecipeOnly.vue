@@ -33,16 +33,16 @@
           <li>
             <span>Favorite:</span>
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
-                   v-if="this.favortied === true" checked disabled>
+                   v-if="this.favorited === true" checked disabled>
             <input class="form-check-input" type="checkbox" value="" @click="Favorite()" id="flexCheckDefault"
-                   style="margin-left:10px" v-else-if="this.favortied !== true">
+                   style="margin-left:10px" v-else-if="this.favorited !== true">
           </li>
           <li>
             <span>Watched:</span>
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
-                   v-if="this.watched == true" checked disabled>
+                   v-if="this.watched === true" checked disabled>
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
-                   v-else-if="this.watched != true" disabled>
+                   v-else-if="this.watched !== true" disabled>
           </li>
         </ul>
       </b-card-text>
@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       Instructions: "",
-      favortied: "",
+      favorited: this.favorited,
       watched: ""
     };
   },
@@ -80,30 +80,33 @@ export default {
     this.getWatched();
   },
   methods: {
-    // async getFavorites(){
-    //   try {
-    //     const response = await this.axios.get(this.$root.store.server_domain+"/users/favoritesIDOnly",);
-    //     const recipesIDS = response.data;
-    //     //let recipes=RecipesData;
-    //     for(let i = 0; i<recipesIDS.length;i++){
-    //       if(recipesIDS[i] === this.recipe.id){
-    //         this.favortied = true;
-    //         return;
-    //       }
-    //     }
-    //     this.favortied = '';
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    //
-    // },
+    async getFavorites() {
+      try {
+        const response = await this.axios.get(this.$root.store.server_domain + "/users/favorites");
+        const recipesIDS = response.data;
+        for (let i = 0; i < recipesIDS.length; i++) {
+          if (recipesIDS[i] === this.Recipe.recipe_id) {
+            this.favortied = true;
+            return;
+          }
+        }
+        this.favortied = false;
+      } catch (error) {
+        console.log(error);
+      }
+
+    },
     async Favorite() {
       try {
-        console.log("favorite" , this.Recipe.recipe_id);
-        await this.axios.post(
-          this.$root.store.server_domain + "/users/addFavoriteReciped/" + parseInt(this.Recipe.recipe_id), null, { withCredentials: true }
-        );
-        this.favorited = true;
+        await this.getFavorites();
+        if (!this.favorited === true) {
+          console.log("favorite", this.Recipe.recipe_id);
+          await this.axios.post(
+            this.$root.store.server_domain + "/users/addFavoriteReciped/" + parseInt(this.Recipe.recipe_id), null, { withCredentials: true }
+          );
+          this.favorited = true;
+        } else
+          this.favorited = false;
       } catch (error) {
         console.log(error);
       }

@@ -30,9 +30,9 @@
             <li>
               <span>Favorite:</span>
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
-                     v-if="this.favortied === true" checked disabled>
+                     v-if="this.favorited === true" checked disabled>
               <input class="form-check-input" type="checkbox" value="" @click="Favorite()" id="flexCheckDefault"
-                     style="margin-left:10px" v-else-if="this.favortied !== true">
+                     style="margin-left:10px" v-else-if="this.favorited !== true">
             </li>
             <li>
               <span>Watched:</span>
@@ -59,7 +59,7 @@ export default {
   },
   data() {
     return {
-      favortied:'',
+      favorited:'',
       watched:'',
     };
   },
