@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">Register</h1>
+    <h1 class="title" style="color: white">Register</h1>
     <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
       <b-form-group
         id="input-group-username"
@@ -144,14 +144,13 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-button type="reset" variant="danger" style="font-size: 25px">Reset</b-button>
       <b-button
         type="submit"
         variant="primary"
-        style="width:250px;"
+        style="max-width:300px;padding-right: 20px;font-size: 25px"
         class="ml-5 w-75"
-      >Register</b-button
-      >
+      >Register</b-button>
       <div class="mt-2">
         Already have an account?
         <router-link to="login">Log in here</router-link>

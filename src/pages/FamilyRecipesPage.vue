@@ -1,13 +1,16 @@
+
 <template>
-  <div>
+<div>
+  <section class="family">
 
     <!--    <div class="container2" style="margin-left:140px; width: 1355px;">-->
-    <h1 class="title" style="margin-left:-20px">Family Recipes</h1>
+    <h1 class="title" style="margin-left:-20px; color: black; font-size: 100px">Family Recipes</h1>
     <!--      <section style="margin-left: 300px" class="ReturnedRecipes">-->
     <b-card-group deck style="margin-bottom: 50px">
       <b-card no-body title="Couscous with vegetables and chicken" img-top tag="article"
-              style="max-width: 25rem; margin-left: 500px" class="mb-2">
-        <b-card-img src="https://img.mako.co.il/2020/06/09/chicken_w_cuscus_afik_c.jpg" style="max-width: 700px; max-height: 700px;" />
+              style="max-width: 25rem; margin-left: 400px" class="mb-2">
+        <b-card-img src="https://img.mako.co.il/2020/06/09/chicken_w_cuscus_afik_c.jpg"
+                    style="max-width: 700px; max-height: 700px;" />
         <b-card-title style="font-weight:bold;margin-left:12px"
                       title="Couscous with vegetables and chicken"></b-card-title>
         <b-card-text>
@@ -24,7 +27,8 @@
                 עוד 4 דקות, אחר כך מוסיפים שום ואפונה ומסדרים את חלקי העוף גם הם בסיר.&nbsp;</p>
               <p><small>2. </small> מערבבים בקערה כורכום, קארי, זרעי כמון, רסק עגבניות , חרדל דיז'ון ואת ציר העוף,
                 ומעבירים לסיר. מביאים לרתיחה, מנמיכים את האש, מכסים מבשלים על להבה נמוכה כשעה.</p>
-              <p><small>3. </small> מכינים קוסקוס: מערבבים את כל החומרים בקערה, מכסים בצלחת ומבשלים במיקרו (בעוצמה מלאה) 5
+              <p><small>3. </small> מכינים קוסקוס: מערבבים את כל החומרים בקערה, מכסים בצלחת ומבשלים במיקרו (בעוצמה מלאה)
+                5
                 דקות. פותחים את הגרגירים עם מזלג ומכסים שוב עד ההגשה.</p>
               <p><small>4. </small> ההגשה: עורמים ערמת קוסקוס בצלחת עמוקה ומעל את העוף עם הירקות והרוטב החם.</p>
             </li>
@@ -32,10 +36,11 @@
         </b-card-text>
       </b-card>
     </b-card-group>
-    <b-card-group deck style="margin-top:-895px;margin-left: 325px;">
+    <b-card-group deck style="margin-top:-937px;margin-left: 325px;">
       <b-card no-body title="Pasta with tomato sauce" img-top tag="article"
-              style="max-width: 25rem;margin-left: 535px;margin-bottom: 100px" class="mb-2">
-        <b-card-img src="https://img.mako.co.il/2020/05/07/shutterstock_388471528_b.jpg" style="max-width: 700px; max-height: 700px;"/>
+              style="max-width: 25rem;margin-left: 435px;margin-bottom: 130px" class="mb-2">
+        <b-card-img src="https://img.mako.co.il/2020/05/07/shutterstock_388471528_b.jpg"
+                    style="max-width: 700px; max-height: 700px;" />
         <b-card-title style="font-weight:bold;margin-left:12px"
                       title="Pasta with tomato sauce"></b-card-title>
         <b-card-text>
@@ -58,9 +63,11 @@
         </b-card-text>
       </b-card>
     </b-card-group>
-    <b-card-group deck style="margin-top:-621px;margin-left: 801px;">
-      <b-card no-body title="Pasta with tomato sauce" img-top tag="article" style="max-width: 25rem;max-height:80rem; margin-left: 435px" class="mb-2">
-        <b-card-img src="https://img.mako.co.il/2020/09/01/master_chef3_2_maroken_fish_i.jpg" style="width: 373px; height: 280px;"/>
+    <b-card-group deck style="margin-top:-642px;margin-left: 698px;">
+      <b-card no-body title="Pasta with tomato sauce" img-top tag="article"
+              style="max-width: 25rem;max-height:80rem; margin-left: 435px" class="mb-2">
+        <b-card-img src="https://img.mako.co.il/2020/09/01/master_chef3_2_maroken_fish_i.jpg"
+                    style="width: 373px; height: 280px;" />
         <b-card-title style="font-weight:bold;margin-left:12px" title="Moroccan fish Recipe"></b-card-title>
         <b-card-text style="margin-right:15px">
           <ul class="recipe-overview" style="list-style-type: none;">
@@ -89,15 +96,14 @@
         </b-card-text>
       </b-card>
     </b-card-group>
-    <!--      </section>-->
-  </div>
-  <!--  </div>-->
+  </section>
+</div>
 </template>
 
 <script>
-export default {
-  name: "FamilyRecipes"
-};
+  export default {
+    name: "FamilyRecipes"
+  };
 </script>
 
 <style scoped>

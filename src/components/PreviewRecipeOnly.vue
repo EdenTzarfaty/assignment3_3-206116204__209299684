@@ -75,47 +75,47 @@ export default {
     };
   },
   mounted() {
-    this.getFavorites();
+    //this.getFavorites();
   },
   methods: {
-    async getFavorites() {
-      try {
-        console.log("getFavorite:" ,this.favorited)
-        const response = await this.axios.get(this.$root.store.server_domain + "/users/favorites", { withCredentials: true });
-        console.log("getFavorite2:" ,this.favorited)
-        const recipesIDS = response.data;
-        for (let i = 0; i < recipesIDS.length; i++) {
-          if (recipesIDS[i] === this.Recipe.recipe_id) {
-            this.favorited = true;
-            return;
-          }
-        }
-        this.favorited = false;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async Favorite() {
-      try {
-        //await this.getFavorites();
-        console.log("favorite:" ,this.favorited)
-        if (!this.favorited) {
-          await this.axios.post(
-            this.$root.store.server_domain + "/users/addFavoriteReciped/" + parseInt(this.Recipe.recipe_id),
-            null,
-            { withCredentials: true }
-          );
-          this.favorited = true;
-        } else {
-          this.favorited = false;
-        }
-        console.log("favorite2:" ,this.favorited)
-
-
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    // async getFavorites() {
+    //   try {
+    //     console.log("getFavorite:" ,this.favorited)
+    //     const response = await this.axios.get(this.$root.store.server_domain + "/users/favorites", { withCredentials: true });
+    //     console.log("getFavorite2:" ,this.favorited)
+    //     const recipesIDS = response.data;
+    //     for (let i = 0; i < recipesIDS.length; i++) {
+    //       if (recipesIDS[i] === this.Recipe.recipe_id) {
+    //         this.favorited = true;
+    //         return;
+    //       }
+    //     }
+    //     this.favorited = false;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
+    // async Favorite() {
+    //   try {
+    //     //await this.getFavorites();
+    //     console.log("favorite:" ,this.favorited)
+    //     if (!this.favorited) {
+    //       await this.axios.post(
+    //         this.$root.store.server_domain + "/users/addFavoriteReciped/" + parseInt(this.Recipe.recipe_id),
+    //         null,
+    //         { withCredentials: true }
+    //       );
+    //       this.favorited = true;
+    //     } else {
+    //       this.favorited = false;
+    //     }
+    //     console.log("favorite2:" ,this.favorited)
+    //
+    //
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
     getInstructions() {
       if (this.Recipe.analyzedInstructions === undefined && this.Recipe.instructions !== undefined) {
         this.Instructions = this.Recipe.instructions;

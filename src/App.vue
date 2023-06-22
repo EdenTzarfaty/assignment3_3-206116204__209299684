@@ -6,14 +6,14 @@
         <router-link :to="{ name: 'search' }" style="color: white"> Search |</router-link>
         <router-link :to="{ name: 'about' }" style="color: white"> About</router-link>
       </div>
-      <div class="nav-right" style="margin-bottom:-80px; margin-right: 50px">
+      <div class="nav-right" style="margin-bottom:-80px;">
         <span v-if="!$root.store.username" class="guest" style="color: white;font-size: 16px">
           hello guest |
           <router-link :to="{ name: 'register' }" style="color: white">Register | </router-link>
           <router-link :to="{ name: 'login' }" style="color: white">Login</router-link>
         </span>
         <nav class="navbar navbar-expand-lg navbar-light"
-             style="margin-left: 1500px;" v-else>
+             style="margin-right: 50px;" v-else>
           <ul class="navbar-nav">
             <li class="nav-item active">
               <b-nav-item class="nav-link active">

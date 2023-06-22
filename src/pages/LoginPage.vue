@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">Login</h1>
+    <h1 class="title" style="color: white;">Login</h1>
     <b-form @submit.prevent="onLogin">
       <b-form-group
         id="input-group-Username"
@@ -40,7 +40,7 @@
       <b-button
         type="submit"
         variant="primary"
-        style="width:100px;display:block;"
+        style="width:100px;display:block;font-size: 25px"
         class="mx-auto w-100"
       >Login
       </b-button
@@ -115,7 +115,7 @@ export default {
             username: this.form.username,
             password: this.form.password
           }
-        );
+        ,{withCredentials: true});
         // console.log(response);
         // this.$root.loggedIn = true;
         console.log(this.$root.store.login);
