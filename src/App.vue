@@ -63,7 +63,7 @@ export default {
 html, body {
   height: 100%;
   margin: 0;
-  background-image: url("../src/pages/.src/assets/pictures/background.jpg");
+  background-image: url("../src/pages/.src/assets/pictures/background2.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

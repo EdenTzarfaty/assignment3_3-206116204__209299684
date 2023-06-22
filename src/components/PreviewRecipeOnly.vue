@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card no-body v-bind:title="Recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">
+    <b-card no-body v-bind:title="Recipe.title" img-top tag="article" style="width: 25rem; margin-left: -6px;margin: -10px" class="mb-2">
       <router-link :to="{ name: 'RecipeViewPage', params:{id:Recipe.recipe_id} } ">
         <b-card-img :src="Recipe.image" />
       </router-link>

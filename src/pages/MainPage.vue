@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <h1 class="title" style="color: #1b1b1b; padding-top: 50px">Recipes web</h1>
+    <h1 class="title" style="color: #1b1b1b; margin-top: 170px; font-family: Agency FB,serif;font-size: 100px">Recipes web</h1>
+<!--    <img src="src/pages/.src/assets/pictures/background.jpg" alt="Logo" class="logo">-->
+
     <b-container fluid class="recipe-container">
       <h3 class="explore-badge">Explore these recipes</h3>
       <div class="recipe-row">
@@ -22,7 +24,7 @@
     <div id="Guest" v-if="!$root.store.username">
 
       <div class="login-container">
-        <LoginPage class="comp" style="margin-top: -775px;padding-bottom: 228px;  padding-top: 200px;"></LoginPage>
+        <LoginPage class="comp" style="margin-top: -775px;padding-bottom: 228px;  padding-top: 200px;margin-right: -150px"></LoginPage>
       </div>
     </div>
     <!--      לסדר את 3 המתכונים שהמשתמש צפה לאחרונה    <li>-->

@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h1 class="title">Search Page</h1>
+    <h1 class="title">Search Recipes</h1>
     <section class="search-bar">
-      <div class="container1" style="margin-left:300px">
+      <div class="container1" style="margin-left:200px">
         <div class="row">
           <form>
             <div>
@@ -93,7 +93,7 @@
                 <br>
                 <br>
                 <br>
-                <div class="input-group-append">
+                <div class="input-group-append" style="margin-left: 50px">
                   <!--                 <button type="sumbit" @click="searchRecipe()" class="btn btn-link">-->
                   <b-button type="sumbit" @click="searchRecipe()" variant="primary">Search</b-button>
                   <!--                    -->
@@ -108,14 +108,13 @@
       </div>
     </section>
     <div>
-      <h1 class="title" style="margin-left:160px">Recipes</h1>
-      <!--/*      <b-dropdown id="dropdown-2" text="Sort By" style="margin-left:160px" v-if="this.recipes != ''">*/-->
       <b-dropdown id="dropdown-2"
                   split-variant="outline-primary"
                   variant="primary"
                   text="Sort By"
                   v-if="this.recipes !== ''"
-                  class="dd-sortBy">
+                  class="dd-sortBy"
+      style="margin-left: 10px; margin-bottom: 50px; padding-top: 10px;">
         <b-dropdown-item @click="sortByTime()">Time</b-dropdown-item>
         <b-dropdown-item @click="sortByLikes()">Likes</b-dropdown-item>
       </b-dropdown>
