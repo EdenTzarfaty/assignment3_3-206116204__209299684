@@ -25,10 +25,11 @@
           <div class="wrapped">
             Instructions:
             <ol>
-              <li v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
+              <li v-for="(step, index) in parseInstructions(recipe.instructions)" :key="index">
+                {{ step }}
               </li>
             </ol>
+
           </div>
         </div>
       </div>
@@ -50,12 +51,28 @@ export default {
       required: false
     }
   },
+  methods: {
+    parseInstructions(htmlString) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlString, 'text/html');
+      const listItems = doc.querySelectorAll('ol > li');
+      const steps = [];
+
+      listItems.forEach((li) => {
+        steps.push(li.textContent.trim());
+      });
+
+      return steps;
+    },
+  },
+
   data() {
     return {
       recipe: null
     };
   },
   async created() {
+
     try {
       let response;
       // response = this.$route.params.response;
@@ -68,15 +85,19 @@ export default {
         console.log("the recipe id we got from params:")
         console.log(this.id)
         response = await this.axios.get(
-          this.$root.store.server_domain+"/recipes/"+this.id
+          this.$root.store.server_domain+"/recipes/recipeDetails/"+this.id
         );
       } catch (error) {
         console.log("error.response.status", error.response.status);
         await this.$router.replace("/NotFound");
         return;
       }
+      this.recipe = response.data
       console.log("recipeinfo")
       console.log(response.data)
+      console.log("090902902902897687")
+      console.log(this.recipe.title)
+      console.log(this.recipe)
       let {
         analyzedInstructions,
         instructions,
@@ -125,6 +146,12 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  font-family: "Agency FB", serif;
+  font-weight: bold;
+  color: white;
+  background-color: #2c3e50;
+}
 .wrapper {
   display: flex;
 }

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-card no-body v-bind:title="Recipe.title" img-top tag="article" style="width: 25rem; margin-left: -6px;margin: -10px" class="mb-2">
+    <!-- <b-card :title="recipe.title" :img-src="recipe.image" img-alt="Image" img-top tag="article" style="max-width: 20rem;" class="mb-2"> -->
+    <b-card no-body v-bind:title="Recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">
       <router-link :to="{ name: 'RecipeViewPage', params:{id:Recipe.recipe_id} } ">
         <b-card-img :src="Recipe.image" />
       </router-link>
@@ -21,7 +22,7 @@
           </li>
           <li>
             <b-icon-egg-fill style="font-size: 2rem;"></b-icon-egg-fill>
-            <span>Vegetarian:</span> {{ Recipe.vegetarian }}
+            <span>Vegeterian:</span> {{ Recipe.vegetarian }}
           </li>
           <li>
             <b-icon-x-circle-fill style="font-size: 2rem;"></b-icon-x-circle-fill>
@@ -32,16 +33,16 @@
           <li>
             <span>Favorite:</span>
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
-                   v-if="favorited === true" checked disabled>
+                   v-if="this.favorited === true" checked disabled>
             <input class="form-check-input" type="checkbox" value="" @click="Favorite()" id="flexCheckDefault"
-                   style="margin-left:10px" v-else-if="favorited !== true">
+                   style="margin-left:10px" v-else-if="this.favorited !== true">
           </li>
           <li>
             <span>Watched:</span>
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
-                   v-if="watched === true" checked disabled>
+                   v-if="this.watched === true" checked disabled>
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
-                   v-else-if="watched !== true" disabled>
+                   v-else-if="this.watched !== true" disabled>
           </li>
         </ul>
       </b-card-text>
@@ -69,61 +70,72 @@ export default {
   },
   data() {
     return {
-      Instructions: '',
-      favorited: false,
-      watched: false
+      Instructions: "",
+      favorited: this.favorited,
+      watched: ""
     };
   },
   mounted() {
-    //this.getFavorites();
+    this.getFavorites();
+    this.getWatched();
   },
   methods: {
-    // async getFavorites() {
+    async getFavorites() {
+      try {
+        const response = await this.axios.get(this.$root.store.server_domain + "/users/favorites");
+        const recipesIDS = response.data;
+        for (let i = 0; i < recipesIDS.length; i++) {
+          if (recipesIDS[i] === this.Recipe.recipe_id) {
+            this.favortied = true;
+            return;
+          }
+        }
+        this.favortied = false;
+      } catch (error) {
+        console.log(error);
+      }
+
+    },
+    async Favorite() {
+      try {
+        await this.getFavorites();
+        if (!this.favorited === true) {
+          console.log("favorite", this.Recipe.recipe_id);
+          await this.axios.post(
+            this.$root.store.server_domain + "/users/addFavoriteReciped/" + parseInt(this.Recipe.recipe_id), null, { withCredentials: true }
+          );
+          this.favorited = true;
+        } else
+          this.favorited = false;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // async getWatched(){
     //   try {
-    //     console.log("getFavorite:" ,this.favorited)
-    //     const response = await this.axios.get(this.$root.store.server_domain + "/users/favorites", { withCredentials: true });
-    //     console.log("getFavorite2:" ,this.favorited)
-    //     const recipesIDS = response.data;
-    //     for (let i = 0; i < recipesIDS.length; i++) {
-    //       if (recipesIDS[i] === this.Recipe.recipe_id) {
-    //         this.favorited = true;
+    //     const response = await this.axios.get(this.$root.store.server_domain+"/users/user_indication_recipe_NEW",);
+    //     const RecipesData = response.data;
+    //     let recipes=RecipesData;
+    //     for(let i = 0; i<recipes.length;i++){
+    //       if(recipes[i] === this.Recipe.id){
+    //         this.watched = true;
     //         return;
     //       }
     //     }
-    //     this.favorited = false;
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
-    // async Favorite() {
-    //   try {
-    //     //await this.getFavorites();
-    //     console.log("favorite:" ,this.favorited)
-    //     if (!this.favorited) {
-    //       await this.axios.post(
-    //         this.$root.store.server_domain + "/users/addFavoriteReciped/" + parseInt(this.Recipe.recipe_id),
-    //         null,
-    //         { withCredentials: true }
-    //       );
-    //       this.favorited = true;
-    //     } else {
-    //       this.favorited = false;
-    //     }
-    //     console.log("favorite2:" ,this.favorited)
-    //
-    //
+    //     this.watched = '';
     //   } catch (error) {
     //     console.log(error);
     //   }
     // },
     getInstructions() {
+      //console.log(this.Recipe)
       if (this.Recipe.analyzedInstructions === undefined && this.Recipe.instructions !== undefined) {
         this.Instructions = this.Recipe.instructions;
       } else {
         let returnedstring = "";
-        for (let i = 0; i < this.Recipe.analyzedInstructions.length; i++) {
+        for (let i = 0; i < this.Recipe.analyzedInstructions.length; i++) { //go over every Instruction
           returnedstring += "Part " + (i + 1) + ": ";
-          for (let j = 0; j < this.Recipe.analyzedInstructions[i].steps.length; j++) {
+          for (let j = 0; j < this.Recipe.analyzedInstructions[i].steps.length; j++) { //go over every step
             returnedstring += "Step " + (j + 1) + ": " + this.Recipe.analyzedInstructions[i].steps[j].step + " ";
           }
         }
@@ -145,5 +157,9 @@ div {
   margin-bottom: 10px;
   width: 310px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  /* in order: x offset, y offset, blur size, spread size, color */
+  /* blur size and spread size are optional (they default to 0) */
+
 }
+
 </style>

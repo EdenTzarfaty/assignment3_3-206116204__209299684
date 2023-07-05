@@ -116,8 +116,8 @@ export default {
             password: this.form.password
           }
         ,{withCredentials: true});
-        // console.log(response);
-        // this.$root.loggedIn = true;
+
+
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
         try {
