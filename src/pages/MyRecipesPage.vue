@@ -4,7 +4,7 @@
     <section style="margin-left: 180px" class="ReturnedRecipes" v-if="this.recipes !== ''">
       <b-card-group deck>
         <PreviewRecipe v-for="recipe in this.recipes"
-                       :key="recipe.recipe_id"
+                       :key="recipe.id"
                        :Recipe="recipe"
         ></PreviewRecipe>
       </b-card-group>
@@ -17,8 +17,9 @@
 
 import PreviewRecipe from "@/components/PreviewRecipe.vue";
 
+
 export default {
-  name: "MyRecipes",
+  name: "MyRecipesPage",
   components: {
     PreviewRecipe
   },
@@ -35,9 +36,8 @@ export default {
       try {
         console.log("MyRecipes");
         const response = await this.axios.get(this.$root.store.server_domain + "/users/allRecipes", {withCredentials: true});
-        const RecipesData = response.data;
-        this.recipes = RecipesData;
-        console.log(this.recipes[0]);
+        this.recipes = response.data;
+        console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }

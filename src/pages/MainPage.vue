@@ -258,12 +258,13 @@
 import RandomRecipe from "../components/RandomRecipe";
 import LoginPage from "../pages/LoginPage";
 import PreviewRecipe from "../components/PreviewRecipe";
+import PreviewRecipeOnly from "../components/PreviewRecipeOnly";
 
 export default {
   components: {
     RandomRecipe,
     LoginPage,
-    PreviewRecipe
+    PreviewRecipe,
   },
   data() {
     return {

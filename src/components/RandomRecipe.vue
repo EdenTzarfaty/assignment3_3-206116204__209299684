@@ -1,11 +1,17 @@
 <template>
   <div>
-    <b-card :title="recipe.title" :img-src="recipe.image" img-alt="Image" img-top tag="article"
-            style="max-width: 20rem;" class="mb-2">
-      <b-card no-body v-bind:title="recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">
-        <router-link :to="{ name: 'RecipeViewPage', params:{recipeId:recipe.recipe_id} } ">
-        </router-link>
-        <b-card-text>
+<!--    <b-card :title="recipe.title" :img-src="recipe.image" img-alt="Image" img-top tag="article"-->
+<!--            style="max-width: 20rem;" class="mb-2">-->
+<!--      <b-card no-body v-bind:title="recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">-->
+<!--&lt;!&ndash;        <router-link :to="{ name: 'RecipeViewPage', params:{recipeId:recipe.recipe_id} } ">&ndash;&gt;-->
+<!--&lt;!&ndash;        </router-link>&ndash;&gt;-->
+<!--        <b-card-text>-->
+    <b-card no-body v-bind:title="recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">
+      <router-link :to="{ name: 'RecipeViewPage', params:{id:recipe.recipe_id} } ">
+        <b-card-img :src="recipe.image" />
+      </router-link>
+      <b-card-title v-bind:title="recipe.title"></b-card-title>
+      <b-card-text>
           <ul class="recipe-overview" style="list-style-type: none;">
             <li>
               <b-icon-clock-history style="font-size: 2rem;"></b-icon-clock-history>
@@ -44,7 +50,6 @@
           </ul>
         </b-card-text>
       </b-card>
-    </b-card>
   </div>
 </template>
 

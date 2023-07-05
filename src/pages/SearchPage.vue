@@ -182,6 +182,7 @@ export default {
       this.num = x;
     },
     async searchRecipe() {
+      // this.num = 5;
       // let query=JSON.stringify(this.query);
       // let num = JSON.stringify(this.num);
       let cuisineFixed = "";
@@ -212,6 +213,8 @@ export default {
         this.recipes = RecipesData;
         const parsed = JSON.stringify(this.recipes);
         this.$root.store.setSearchResults(parsed);
+        console.log(this.recipes);
+
         // console.log(this.$root.store.searchResults)
         // console.log(localStorage.searchResults[0])
         //await previewRecipeOnly.methods.userWatched();
