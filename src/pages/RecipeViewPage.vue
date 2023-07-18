@@ -58,6 +58,7 @@ export default {
   methods: {
     async indicateLastWatch(){
       try {
+        console.log(this.id)
         await this.axios.post(this.$root.store.server_domain+"/users/user_watched_recipe/" + this.id, null,{ withCredentials: true }
         );
       } catch (error) {

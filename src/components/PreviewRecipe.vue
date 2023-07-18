@@ -69,8 +69,7 @@ export default {
   methods: {
     async getFavorites() {
       try {
-        console.log("Recipe");
-        console.log(this.Recipe.recipe_id);
+
         const recipesIDS = await this.axios.get(this.$root.store.server_domain + "/users/favoritesIDs", { withCredentials: true });
         for (let i = 0; i < recipesIDS.data.length; i++) {
           if (recipesIDS.data[0][i] === this.Recipe.recipe_id) {
