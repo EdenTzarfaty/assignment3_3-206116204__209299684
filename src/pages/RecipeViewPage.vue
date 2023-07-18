@@ -22,7 +22,7 @@
               </li>
             </ul>
           </div>
-          <div class="wrapped">
+          <div class="wrapped" style="margin-top: 70px; margin-right: 200px">
             Instructions:
             <ol>
               <li v-for="(step, index) in parseInstructions(recipe.instructions)" :key="index">
@@ -51,7 +51,19 @@ export default {
       required: false
     }
   },
+  mounted() {
+    this.indicateLastWatch();
+  },
+
   methods: {
+    async indicateLastWatch(){
+      try {
+        await this.axios.post(this.$root.store.server_domain+"/users/user_watched_recipe/" + this.id, null,{ withCredentials: true }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    },
     parseInstructions(htmlString) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(htmlString, 'text/html');
@@ -75,13 +87,8 @@ export default {
 
     try {
       let response;
-      // response = this.$route.params.response;
       try {
-        // console.log(localStorage.getItem('query3'))
-        // let recipe_id=JSON.parse(localStorage.getItem('query3'));
-        // console.log(recipe_id);
-        // let recipe_id_int = parseInt(recipe_id);
-        // console.log(recipe_id_int);
+
         console.log("the recipe id we got from params:")
         console.log(this.id)
         response = await this.axios.get(
@@ -93,11 +100,6 @@ export default {
         return;
       }
       this.recipe = response.data
-      console.log("recipeinfo")
-      console.log(response.data)
-      console.log("090902902902897687")
-      console.log(this.recipe.title)
-      console.log(this.recipe)
       let {
         analyzedInstructions,
         instructions,
@@ -127,17 +129,7 @@ export default {
       };
 
       this.recipe = _recipe;
-      try {
-        // const parsed = JSON.stringify(this.xd);
-        // this.$root.store.setQuery3(parsed);
-        const response = await this.axios.post(this.$root.store.server_domain+"/users/user_watched_recipe",
-          {
-            recipeId: this.id
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
+
     } catch (error) {
       console.log(error);
     }
@@ -151,6 +143,7 @@ export default {
   font-weight: bold;
   color: white;
   background-color: #2c3e50;
+  font-size: 30px;
 }
 .wrapper {
   display: flex;

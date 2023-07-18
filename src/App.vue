@@ -17,7 +17,8 @@
           <ul class="navbar-nav">
             <li class="nav-item active">
               <b-nav-item class="nav-link active">
-                <span style="color: #ff2525; font-size: 20px;">hello {{ $root.store.username }}  </span></b-nav-item>
+                <span class="username" >hello {{ $root.store.username }}  </span>
+              </b-nav-item>
             </li>
             <li>
               <b-dropdown id="dropdown-1" text="Personal" class="m-md-2" style="padding-top: 5px;">
@@ -32,6 +33,8 @@
                 <!--                  <b-dropdown-item v-b-modal="'modal-prevent-closing'">Create Recipe</b-dropdown-item>-->
               </b-dropdown>
             </li>
+            <button @click="Logout"  style="color: white; background-color: #3b4151;  width: 120px; height: 40px;margin-top: 10px">Logout</button>
+
           </ul>
         </nav>
       </div>
@@ -98,6 +101,12 @@ html, body {
 
 #nav a {
   font-weight: bold;
+}
+
+.username{
+  font-family:  'Montserrat', Arial, sans-serif;
+  color: #ff2525;
+  font-size: 20px
 }
 
 

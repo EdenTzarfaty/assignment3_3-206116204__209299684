@@ -1,11 +1,5 @@
 <template>
   <div>
-<!--    <b-card :title="recipe.title" :img-src="recipe.image" img-alt="Image" img-top tag="article"-->
-<!--            style="max-width: 20rem;" class="mb-2">-->
-<!--      <b-card no-body v-bind:title="recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">-->
-<!--&lt;!&ndash;        <router-link :to="{ name: 'RecipeViewPage', params:{recipeId:recipe.recipe_id} } ">&ndash;&gt;-->
-<!--&lt;!&ndash;        </router-link>&ndash;&gt;-->
-<!--        <b-card-text>-->
     <b-card no-body v-bind:title="recipe.title" img-top tag="article" style="max-width: 20rem;" class="mb-2">
       <router-link :to="{ name: 'RecipeViewPage', params:{id:recipe.recipe_id} } ">
         <b-card-img :src="recipe.image" />
@@ -69,11 +63,28 @@ export default {
     };
   },
   mounted() {
-    //this.getFavorites();
-    //this.getWatched();
+    this.getFavorites();
+    this.getWatched();
   },
   methods: {
-
+    async getFavorites() {
+      try {
+        const recipesIDS = await this.axios.get(this.$root.store.server_domain + "/users/favoritesIDs", { withCredentials: true });
+        console.log(this.Recipe.recipe_id)
+        this.favorited = recipesIDS.data.includes(this.Recipe.recipe_id);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getWatched() {
+      try {
+        const recipesIDS = await this.axios.get(this.$root.store.server_domain + "/users/user_last_3_watch", { withCredentials: true });
+        console.log(this.Recipe.recipe_id)
+        this.watched = recipesIDS.data.includes(this.Recipe.recipe_id);
+      } catch (error) {
+        console.log(error);
+      }
+    },
 // Use the Axios instance to make the request
     async Favorite() {
       try {
@@ -90,7 +101,7 @@ export default {
       // this.axios.defaults.withCredentials = true;
       try {
         await this.axios.post(
-          this.$root.store.server_domain + "/users/user_watched_recipe/" + parseInt(this.recipe.recipe_id), null, { withCredentials: true }
+          this.$root.store.server_domain + "/users/user_watched_recipe/" + parseInt(this.recipe.recipe_id), null,{ withCredentials: true }
         );
         this.watched = true;
       } catch (error) {

@@ -122,7 +122,7 @@
     <!--    <h1 class="subtitle" style="margin-left:300px" v-if="this.recipes.length == 0" >0 Search results for the given query</h1>-->
     <!--    <h1 class="subtitle" style="margin-left:200px" v-if="this.recipes.length == 0" >0 Search results</h1>-->
     <section class="ReturnedRecipes" v-if="this.recipes !== ''">
-      <b-card-group deck>
+      <b-card-group deck style="margin-left: 70px;">
         <PreviewRecipeOnly v-for="recipe in this.recipes"
                            :key="recipe.recipe_id"
                            :Recipe="recipe"
@@ -209,11 +209,9 @@ export default {
           }
         );
         const RecipesData = response.data;
-        console.log("===============================");
         this.recipes = RecipesData;
         const parsed = JSON.stringify(this.recipes);
         this.$root.store.setSearchResults(parsed);
-        console.log(this.recipes);
 
         // console.log(this.$root.store.searchResults)
         // console.log(localStorage.searchResults[0])
@@ -253,15 +251,13 @@ export default {
 
 
 <style>
-.body {
-  background: #2c3e50;
-}
 
-div[data-v-1d823742] {
-  width: 360px;
-  margin-left: 20px;
-  margin-right: -9px;
-}
+
+/*div[data-v-1d823742] {*/
+/*  width: 360px;*/
+/*  margin-left: 20px;*/
+/*  margin-right: -9px;*/
+/*}*/
 
 .title {
   color: black;
@@ -270,11 +266,6 @@ div[data-v-1d823742] {
   font-size: 80px;
 }
 
-.subtitle {
-  color: black;
-  font-family: "Agency FB", serif;
-  font-weight: bold;
-}
 
 .input-group {
   /*  position: relative;*/
@@ -295,6 +286,7 @@ div[data-v-1d823742] {
 
 .m-2 {
   navbutton_background_color: #42b983;
+
 }
 
 .input-group > .form-control {
@@ -305,31 +297,25 @@ div[data-v-1d823742] {
   min-width: 100px;
 }
 
-.div {
-  width: 360px;
-}
 
-.dropdown-menu {
-  max-height: 280px;
-  overflow-y: auto;
-}
 
 .input-group > .input-group-append > .btn {
   width: 674px;
   height: 40px;
 }
 
-.ReturnedRecipes {
-  background-color: #45494a;
+.card-text {
+  /*height: 80px; !* Adjust text height as needed *!*/
+  overflow: hidden;
 }
 
 .card-title {
-  font-size: 40px;
+  font-size: 50px;
   font-family: "Agency FB", serif;
 }
 
 .card {
-  background-color: #acbeea;
+  font-size: 20px;
 }
 
 </style>

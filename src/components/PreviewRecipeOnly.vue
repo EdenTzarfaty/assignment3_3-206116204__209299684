@@ -32,17 +32,7 @@
 
           <li>
             <span>Favorite:</span>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
-                   v-if="this.favorited === true" checked disabled>
-            <input class="form-check-input" type="checkbox" value="" @click="Favorite()" id="flexCheckDefault"
-                   style="margin-left:10px" v-else-if="this.favorited !== true">
-          </li>
-          <li>
-            <span>Watched:</span>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
-                   v-if="this.watched === true" checked disabled>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-left:10px"
-                   v-else-if="this.watched !== true" disabled>
+            <input class="form-check-input" type="checkbox" value="" id="favoriteCheckbox" style="margin-left:10px" v-model="favorited" @change="favorite()" />
           </li>
         </ul>
       </b-card-text>
@@ -70,63 +60,36 @@ export default {
   },
   data() {
     return {
-      Instructions: "",
-      favorited: this.favorited,
-      watched: ""
+      Instructions: '',
+      favorited: '',
     };
   },
   mounted() {
     this.getFavorites();
-    this.getWatched();
   },
   methods: {
-    // async getFavorites() {
-    //   try {
-    //     const response = await this.axios.get(this.$root.store.server_domain + "/users/favorites");
-    //     const recipesIDS = response.data;
-    //     for (let i = 0; i < recipesIDS.length; i++) {
-    //       if (recipesIDS[i] === this.Recipe.recipe_id) {
-    //         this.favortied = true;
-    //         return;
-    //       }
-    //     }
-    //     this.favortied = false;
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-
-   // },
-    async Favorite() {
-      // try {
-      //   await this.getFavorites();
-      //   if (!this.favorited === true) {
-      //     console.log("favorite", this.Recipe.recipe_id);
-      //     await this.axios.post(
-      //       this.$root.store.server_domain + "/users/addFavoriteReciped/" + parseInt(this.Recipe.recipe_id), null, { withCredentials: true }
-      //     );
-      //     this.favorited = true;
-      //   } else
-      //     this.favorited = false;
-      // } catch (error) {
-      //   console.log(error);
-      // }
+    async getFavorites() {
+      try {
+        const recipesIDS = await this.axios.get(this.$root.store.server_domain + "/users/favoritesIDs", { withCredentials: true });
+        console.log(this.Recipe.recipe_id)
+        this.favorited = recipesIDS.data.includes(this.Recipe.recipe_id);
+      } catch (error) {
+        console.log(error);
+      }
     },
-    // async getWatched(){
-    //   try {
-    //     const response = await this.axios.get(this.$root.store.server_domain+"/users/user_indication_recipe_NEW",);
-    //     const RecipesData = response.data;
-    //     let recipes=RecipesData;
-    //     for(let i = 0; i<recipes.length;i++){
-    //       if(recipes[i] === this.Recipe.id){
-    //         this.watched = true;
-    //         return;
-    //       }
-    //     }
-    //     this.watched = '';
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
+    async favorite() {
+      try {
+        if (!this.favorited) {
+          await this.axios.post(
+            this.$root.store.server_domain + "/users/addFavoriteReciped/" + this.Recipe.recipe_id,
+            null,
+            { withCredentials: true }
+          );
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
     getInstructions() {
       //console.log(this.Recipe)
       if (this.Recipe.analyzedInstructions === undefined && this.Recipe.instructions !== undefined) {
@@ -151,15 +114,17 @@ b-card.title {
   color: blue;
 }
 
+
 div {
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  width: 310px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  //margin-top: 10px;
+  //margin-right: 10px;
+  //margin-bottom: 10px;
+  //width: 310px;
+  //box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   /* in order: x offset, y offset, blur size, spread size, color */
   /* blur size and spread size are optional (they default to 0) */
 
 }
+
 
 </style>

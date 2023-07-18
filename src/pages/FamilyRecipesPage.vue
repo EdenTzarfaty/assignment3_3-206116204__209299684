@@ -6,7 +6,7 @@
     <!--    <div class="container2" style="margin-left:140px; width: 1355px;">-->
     <h1 class="title" style="margin-left:-20px; color: black; font-size: 100px">Family Recipes</h1>
     <!--      <section style="margin-left: 300px" class="ReturnedRecipes">-->
-    <b-card-group deck style="margin-bottom: 50px">
+    <b-card-group deck style="margin-bottom: 50px; margin-left: 210px">
       <b-card no-body title="Couscous with vegetables and chicken" img-top tag="article"
               style="max-width: 25rem; margin-left: 400px" class="mb-2">
         <b-card-img src="https://img.mako.co.il/2020/06/09/chicken_w_cuscus_afik_c.jpg"
@@ -36,7 +36,7 @@
         </b-card-text>
       </b-card>
     </b-card-group>
-    <b-card-group deck style="margin-top:-937px;margin-left: 325px;">
+    <b-card-group deck style="margin-top:-894px;margin-left: 550px;">
       <b-card no-body title="Pasta with tomato sauce" img-top tag="article"
               style="max-width: 25rem;margin-left: 435px;margin-bottom: 130px" class="mb-2">
         <b-card-img src="https://img.mako.co.il/2020/05/07/shutterstock_388471528_b.jpg"
@@ -63,8 +63,8 @@
         </b-card-text>
       </b-card>
     </b-card-group>
-    <b-card-group deck style="margin-top:-642px;margin-left: 698px;">
-      <b-card no-body title="Pasta with tomato sauce" img-top tag="article"
+    <b-card-group deck style="margin-top:-622px;margin-left: 925px;">
+      <b-card no-body title="Fish" img-top tag="article"
               style="max-width: 25rem;max-height:80rem; margin-left: 435px" class="mb-2">
         <b-card-img src="https://img.mako.co.il/2020/09/01/master_chef3_2_maroken_fish_i.jpg"
                     style="width: 373px; height: 280px;" />
